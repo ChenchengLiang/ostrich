@@ -4,3 +4,6 @@
 *.swo
 *.swp
 /.bsp
+.idea/
+project/
+ecma2020/

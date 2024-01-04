@@ -489,6 +489,7 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
     import ap.types.Sort
     import Sort.:::
     import ostrich.automata.Regex2Aut
+    import java.io._
 
     val conjuncts =
       (for (INamedPart(_, g) <- PartExtractor(f);
@@ -544,6 +545,22 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
       println(s"Equation: $s")
 
     println("SatGlucose(0)")
+
+    // Creating a file writer
+    val file = new File("/home/cheli243/Desktop/CodeToGit/Woorpje_benchmarks/temp/output.eq") // specify the file name and path here
+    val bw = new BufferedWriter(new FileWriter(file))
+
+    // Instead of println, write to file
+    bw.write(s"Variables {${variables.map(varNames).mkString("")}}\n")
+    bw.write(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString("")}}\n")
+
+    for (s <- equationStrings)
+      bw.write(s"Equation: $s\n")
+
+    bw.write("SatGlucose(0)\n")
+
+    bw.close()
+    System.exit(0)
   }
 
   private def niceVarName(index : Int) : String = {
