@@ -553,14 +553,13 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
     // Instead of println, write to file
     bw.write(s"Variables {${variables.map(varNames).mkString("")}}\n")
     bw.write(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString("")}}\n")
-
     for (s <- equationStrings)
       bw.write(s"Equation: $s\n")
-
     bw.write("SatGlucose(0)\n")
 
     bw.close()
-    System.exit(0)
+    //give timeout in command line instead of exit
+    //System.exit(0)
   }
 
   private def niceVarName(index : Int) : String = {
