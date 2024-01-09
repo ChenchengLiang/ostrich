@@ -547,6 +547,7 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
     println("SatGlucose(0)")
 
     // Creating a file writer
+    println("- write to output.eq -")
     val file = new File("/home/cheli243/Desktop/CodeToGit/Woorpje_benchmarks/temp/output.eq") // specify the file name and path here
     val bw = new BufferedWriter(new FileWriter(file))
 
