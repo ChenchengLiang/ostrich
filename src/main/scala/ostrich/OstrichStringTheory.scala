@@ -526,17 +526,22 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
         varNames(c)
     }
 
+    val defLetter = 0
+
     val equationStrings =
       for ((s, t) <- equations) yield {
         (term2String(s), term2String(t)) match {
           case ("", str) =>
-            niceTerminal(0) + " = " + niceTerminal(0) + str
+            niceTerminal(defLetter) + " = " + niceTerminal(defLetter) + str
           case (str, "") =>
-            niceTerminal(0) + str + " = " + niceTerminal(0)
+            niceTerminal(defLetter) + str + " = " + niceTerminal(defLetter)
           case (str1, str2) =>
             str1 + " = " + str2
         }
       }
+
+    if (characterCodes.isEmpty)
+      characterCodes.put(0, 0)
 
     println(s"Variables {${variables.map(varNames).mkString("")}}")
     println(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString("")}}")
