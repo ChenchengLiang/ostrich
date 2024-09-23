@@ -583,8 +583,8 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
     val bw = new BufferedWriter(new FileWriter(file))
 
     // Instead of println, write to file
-    bw.write(s"Variables {${variables.map(varNames).mkString("")}}\n")
-    bw.write(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString("")}}\n")
+    bw.write(s"Variables {${variables.map(varNames).mkString(" ")}}\n")
+    bw.write(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString(" ")}}\n")
     for (s <- equationStrings)
       bw.write(s"Equation: $s\n")
     bw.write("SatGlucose(0)\n")
