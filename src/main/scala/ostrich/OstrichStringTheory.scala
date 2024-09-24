@@ -500,11 +500,11 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
          disjunct <- DNFConverter.mbDNF(~g)) {
       println("==== Equation set #" + cnt)
       cnt = cnt + 1
-      printEquationsHelp(disjunct)
+      printEquationsHelp(disjunct,cnt)
     }
   }
 
-  private def printEquationsHelp(f : IFormula) : Unit = {
+  private def printEquationsHelp(f : IFormula, disjunct_index:Int) : Unit = {
     import ap.parser._
     import IExpression._
     import ap.types.Sort
@@ -566,8 +566,9 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
           niceTerminal(defLetter) + " = " + niceTerminal(defLetter)
       }
 
-    if (characterCodes.isEmpty)
+    if (characterCodes.isEmpty) {
       characterCodes.put(0, 0)
+    }
 
     println(s"Variables {${variables.map(varNames).mkString(",")}}")
     println(s"Terminals {${(for (k <- 0 until characterCodes.size) yield niceTerminal(k)).mkString(",")}}")
@@ -577,9 +578,10 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
 
     println("SatGlucose(0)")
 
+
     // Creating a file writer
-    println("- write to output.eq -")
-    val file = new File("/home/cheli243/Desktop/CodeToGit/Woorpje_benchmarks/temp/output.eq") // specify the file name and path here
+    println(s"- write to output_$disjunct_index.eq -")
+    val file = new File(s"/home/cheli243/Desktop/CodeToGit/Woorpje_benchmarks/ostrich_output_folder/output_$disjunct_index.eq") // specify the file name and path here
     val bw = new BufferedWriter(new FileWriter(file))
 
     // Instead of println, write to file
