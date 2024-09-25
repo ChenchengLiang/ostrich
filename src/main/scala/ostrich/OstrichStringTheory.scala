@@ -54,6 +54,7 @@ import ap.util.Seqs
 import scala.collection.mutable.{HashMap => MHashMap}
 import scala.collection.{Map => GMap}
 
+
 object OstrichStringTheory {
 
   // TODO: at some point this has to be fixed, Unicode is
@@ -674,8 +675,17 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
 
 
     // Creating a file writer
-    println(s"- write to output_$disjunct_index.eq -")
-    val file = new File(s"other_solvers/ostrich_export/eq_folder/output_$disjunct_index.eq") // specify the file name and path here
+    val file_name=OstrichMain.file_name
+
+    // Find the index of "/divided_" in the file path
+    val dividedIndex = file_name.indexOf("/divided_")
+    // Extract the substring from the start of the path up to the end of "divided_*"
+    val directory_path = if (dividedIndex != -1) file_name.substring(0, file_name.indexOf("/", dividedIndex + 1)) else ""
+
+
+    println(s"- write to $directory_path/eq_folder/output_$disjunct_index.eq -")
+    val file = new File(s"$directory_path/eq_folder/output_$disjunct_index.eq") // specify the file name and path here
+    //val file = new File(s"other_solvers/ostrich_export/eq_folder/output_$disjunct_index.eq") // specify the file name and path here
     val bw = new BufferedWriter(new FileWriter(file))
 
     // Instead of println, write to file

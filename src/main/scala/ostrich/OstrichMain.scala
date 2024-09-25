@@ -45,6 +45,8 @@ object OstrichMain {
     OstrichStringTheoryBuilder.version +
     " (Princess: " + ap.CmdlMain.version + ")"
 
+  var file_name=""
+
   private val ostrichStringTheory =
     "ostrich.OstrichStringTheory"
 
@@ -57,8 +59,16 @@ object OstrichMain {
 
   PortfolioSetup
 
-  def main(args: Array[String]) : Unit =
+  def main(args: Array[String]) : Unit = {
+    for (a<-args){
+      if (a.contains("divided")){
+        file_name=a
+      }
+    }
+
     ap.CmdlMain.main((options ++ args).toArray)
+
+  }
 
 }
 
