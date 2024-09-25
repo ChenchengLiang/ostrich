@@ -675,7 +675,7 @@ class OstrichStringTheory(transducers : Seq[(String, Transducer)],
 
     // Creating a file writer
     println(s"- write to output_$disjunct_index.eq -")
-    val file = new File(s"/home/cheli243/Desktop/CodeToGit/Woorpje_benchmarks/ostrich_output_folder/output_$disjunct_index.eq") // specify the file name and path here
+    val file = new File(s"eq_folder/output_$disjunct_index.eq") // specify the file name and path here
     val bw = new BufferedWriter(new FileWriter(file))
 
     // Instead of println, write to file
